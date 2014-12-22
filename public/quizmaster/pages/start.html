@@ -1,0 +1,33 @@
+<!-- contact.html -->
+
+<div class="text-center container"">
+<h1>Start Quiz</h1>
+<h5>{{message}}</h5>
+
+<!-- SHOW ERROR/SUCCESS MESSAGES -->
+<div id="messages" ng-show="message">{{ showMessage }}</div>
+
+    <div ng-class="{ 'has-error' : errorPersoon }">
+        <h3>Deelnemers<hr></h3>
+        <h4>1. {{ formData.persoon1 }}</h4>
+        <h4>2. {{ formData.persoon2 }}</h4>
+        <h4>3. {{ formData.persoon2 }}</h4>
+    </div>
+
+    <hr>
+
+    <div>
+        <button type="button" class="btn btn-lg btn-block" ng-click="go('/opdracht')">Eerst opdracht!</button>
+    </div>
+
+</div>
+<footer>
+    <div>&nbsp;</div>
+</footer>
+
+
+
+
+
+
+
