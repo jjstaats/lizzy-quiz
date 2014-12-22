@@ -1,0 +1,36 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    background: #950d5d;
+    color: white;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.state {
+    max-width: 400px;
+    min-width: 300px;
+    padding: 10px;
+    display: none;
+    margin: 0 auto;
+}
+
+h1 {
+    margin: 0;
+    padding: 20px 0 20px 0;
+}
+
+#state-1 {
+
+}
+
+#state-2 {
+
+}
+
+#state-3 {
+
+}
+
+#state-4 {
+
+}
