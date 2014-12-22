@@ -1,7 +1,52 @@
-<!-- about.html -->
+<!-- opdracht.html -->
 <div class="text-center">
     <h1>Opdrachten</h1>
 
     <p>{{ message }}</p>
+
+    <div class="container">
+        <h3>Deelnemers<hr></h3>
+
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label for="score1" class="col-sm-3 control-label">1. {{ formData.data.player1.name }}</label>
+                <div class="col-sm-2">
+                    <input type="number" min="0" max="999" class="form-control" id="score1" placeholder="Score">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="score2" class="col-sm-3 control-label">2. {{ formData.data.player2.name }}</label>
+                <div class="col-sm-2">
+                    <input type="number" min="0" max="999" class="form-control" placeholder="score" ng-model="formData.score2" id="score2" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="score3" class="col-sm-3 control-label">3. {{ formData.data.player3.name }}</label>
+                <div class="col-sm-2">
+                    <input type="number" min="0" max="999" class="form-control" id="score3" placeholder="Score">
+                </div>
+            </div>
+
+
+            <div>
+                <br/>
+                <h4>Opdrachtomschrijving</h4>
+                <div class="well well-lg">{{ currentOp }}</div>
+            </div>
+
+
+            <div>
+                <button type="button" class="btn btn-lg btn-block" ng-click="go('/opdracht')">{{ knoptekst }}</button>
+            </div>
+
+        </form>
+
+
+
+
+
+
 </div>
 
