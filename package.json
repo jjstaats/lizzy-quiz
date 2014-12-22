@@ -7,7 +7,9 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "express": "~4.9.x"
+    "express": "~4.9.x",
+    "mongoskin": "*",
+    "body-parser": "*"
   },
   "engines": {
     "node": "0.10.x"
@@ -19,7 +21,8 @@
   "keywords": [
     "node",
     "heroku",
-    "express"
+    "express",
+    "mongoskin"
   ],
   "license": "MIT"
 }
