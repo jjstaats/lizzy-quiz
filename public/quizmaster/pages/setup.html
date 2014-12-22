@@ -1,0 +1,43 @@
+<!-- setup.html -->
+<div class="text-center container"">
+    <h1>Setup quiz </h1>
+    <h5>{{message}}</h5>
+
+    <!-- SHOW ERROR/SUCCESS MESSAGES -->
+    <div id="messages" ng-show="message">{{ showMessage }}</div>
+
+    <form ng-submit="processForm()">
+
+    <div ng-class="{ 'has-error' : errorPersoon }">
+        <h3>Deelnemers<hr></h3>
+        <p><input type="text" class="form-control" placeholder="persoon1" ng-model="formData.persoon1" /></p>
+        <p><input type="text" class="form-control" placeholder="persoon2" ng-model="formData.persoon2" /></p>
+        <p><input type="text" class="form-control" placeholder="persoon3" ng-model="formData.persoon3" /></p>
+        <span class="help-block" ng-show="errorName">{{ errorPersoon }}</span>
+    </div>
+
+
+    <div ng-class="{ 'has-error' : errorJury }">
+        <h3>Jury<hr></h3>
+        <p><input type="text" class="form-control" placeholder="jury1" ng-model="formData.jury1" /></p>
+        <p><input type="text" class="form-control" placeholder="jury2" ng-model="formData.jury2" /></p>
+        <p><input type="text" class="form-control" placeholder="jury3" ng-model="formData.jury3" /></p>
+        <span class="help-block" ng-show="errorSuperhero">{{ errorJury }}</span>
+    </div>
+
+
+    <div>
+        <h4>Uitleg</h4>
+        <div class="well well-lg">Vul de spelers in die meespelen en vul de jury namen in.</div>
+    </div>
+
+    <div>
+            <button type="submit" class="btn btn-lg btn-block">Submit!</button>
+    </div>
+
+    </form>
+
+</div>
+<footer>
+    <div>&nbsp;</div>
+</footer>
