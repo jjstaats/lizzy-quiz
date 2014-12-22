@@ -12,7 +12,19 @@ app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 
+
 db.bind('states');
+
+app.get('/*',function(req,res,next){
+    res.header('Access-Control-Allow-Origin' , '*' );
+    next();
+});
+
+app.post('/*',function(req,res,next){
+    res.header('Access-Control-Allow-Origin' , '*' );
+    next();
+});
+
 
 app.get('/state', function (request, response) {
     db.states.findOne({current:stateName}, function(err, result) {
