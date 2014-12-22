@@ -1,4 +1,5 @@
 var express = require('express');
+var cors = require('cors');
 
 var bodyParser = require('body-parser');
 
@@ -11,20 +12,9 @@ var stateName = 'state3';
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
-
+app.use(cors());
 
 db.bind('states');
-
-app.get('/*',function(req,res,next){
-    res.header('Access-Control-Allow-Origin' , '*' );
-    next();
-});
-
-app.post('/*',function(req,res,next){
-    res.header('Access-Control-Allow-Origin' , '*' );
-    next();
-});
-
 
 app.get('/state', function (request, response) {
     db.states.findOne({current:stateName}, function(err, result) {

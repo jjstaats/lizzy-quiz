@@ -9,7 +9,8 @@
   "dependencies": {
     "express": "~4.9.x",
     "mongoskin": "*",
-    "body-parser": "*"
+    "body-parser": "*",
+    "cors": "*"
   },
   "engines": {
     "node": "0.10.x"
