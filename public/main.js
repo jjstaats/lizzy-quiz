@@ -16,9 +16,7 @@ function update() {
         .done(function (data) {
             console.log(data.state);
             if (1 == data.state) {
-                if ( 1 !== currentState ) {
-                    setState1(data.data);
-                }
+                setState1(data.data);
             }
             if (2 == data.state) {
                 setState2(data.data);
