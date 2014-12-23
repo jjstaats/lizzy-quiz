@@ -3,7 +3,9 @@
 // create the module and name it quizApp
 var quizApp = angular.module('quizApp', ['ngRoute']);
 var quizApi = "http://quizzzy.herokuapp.com/state";
+var passApi = "http://quizzzy.herokuapp.com/password"
 var quizData = {};
+var password = '12345';
 
 var opdrachten = [
     "Noem 5 surprise van vorig jaar.",
@@ -23,11 +25,29 @@ var opdrachten = [
     "Doe het Gangnam style dansje"
 ];
 
-quizApp.run(['$http', '$q', function ($http, $q) {
-    $http.post(quizApi, {
-        "state": 1,
-        "data": {}
+quizApp.run(['$http', '$q','$location', function ($http, $q, $location) {
+
+    password = Math.random().toString(36).slice(-8);
+
+    $http.post(passApi, {
+        "password": password
+    }).success(function (data) {
+
+        console.log(data);
+
+        if(data.message) {
+            $location.path('/error');
+        } else {
+            quizApi = quizApi + "/" + password;
+            $http.post(quizApi, {
+                "state": 1,
+                "data": {}
+            });
+        }
+    }).error(function (data) {
+        console.log(data);
     });
+
 }]);
 
 
@@ -47,6 +67,11 @@ quizApp.config(function ($routeProvider) {
             controller: 'startController'
         })
 
+        // route for the start page quiz
+        .when('/error', {
+            templateUrl: 'pages/error.html',
+            controller: 'errorController'
+        })
 
         // route for the opdracht page
         .when('/opdracht/:num', {
@@ -181,3 +206,6 @@ quizApp.controller('uitslagController', function ($scope, $http, $location) {
         });
 });
 
+quizApp.controller('errorController', function ($scope, $http, $location) {
+
+});

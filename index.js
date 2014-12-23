@@ -9,13 +9,23 @@ var app = express();
 
 var stateName = 'state3';
 
+function nocache(req, res, next) {
+    res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+    res.header('Expires', '-1');
+    res.header('Pragma', 'no-cache');
+    next();
+}
+
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(cors());
+app.use(nocache);
 
 db.bind('states');
 db.bind('passwords');
+
+
 
 app.get('/state', function (request, response) {
     db.states.findOne({current:stateName}, function(err, result) {
