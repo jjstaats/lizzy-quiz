@@ -36,6 +36,7 @@ quizApp.run(['$http', '$q','$location', function ($http, $q, $location) {
         console.log(data);
 
         if(data.message) {
+            quizData.currentView = 'error';
             $location.path('/error');
         } else {
             quizApi = quizApi + "/" + password;
@@ -127,9 +128,10 @@ quizApp.controller('mainController', function ($scope, $http, $location) {
             }
         };
 
-        $http.post('http://quizzzy.herokuapp.com/state', stateData)
+        $http.post(quizApi, stateData)
             .success(function (data) {
                 quizData = data;
+                quizData.currentView = 'start';
                 $location.path('/start')
             })
             .error(function (data) {
@@ -139,17 +141,24 @@ quizApp.controller('mainController', function ($scope, $http, $location) {
 });
 
 quizApp.controller('startController', function ($scope, $location) {
+    if(!quizData.currentView) {
+        $location.path('/');
+    }
     $scope.message = 'Vragen en score.';
     console.log(quizData);
     $scope.formData = quizData;
 
     $scope.go = function (path) {
+        quizData.currentView = 'opdracht';
         $location.path(path+"/0");
     };
 
 });
 
 quizApp.controller('opdrachtController', function ($scope, $http, $location, $routeParams) {
+    if(!quizData.currentView) {
+        $location.path('/');
+    }
     $scope.message = 'opdrachten binnenhalen';
     $scope.formData = quizData;
 
@@ -166,10 +175,7 @@ quizApp.controller('opdrachtController', function ($scope, $http, $location, $ro
     quizData.data.current = quizData.data["player" + (1 + quizData.currentOp % 3)];
     quizData.data.assignment = opdrachten[quizData.currentOp];
 
-
-
-
-    $http.post('http://quizzzy.herokuapp.com/state', quizData)
+    $http.post(quizApi, quizData)
         .success(function (data) {
             quizData = data;
         })
@@ -181,9 +187,10 @@ quizApp.controller('opdrachtController', function ($scope, $http, $location, $ro
     $scope.go = function (path) {
         quizData.currentOp++;
         if(quizData.currentOp == opdrachten.length){
+            quizData.currentView = 'uitslag';
             $location.path('uitslag');
         } else {
-
+            quizData.currentView = 'opdracht';
             $location.path(path+"/"+quizData.currentOp);
         }
         $scope.go = function(path) {};
@@ -191,13 +198,16 @@ quizApp.controller('opdrachtController', function ($scope, $http, $location, $ro
 });
 
 quizApp.controller('uitslagController', function ($scope, $http, $location) {
+    if(!quizData.currentView) {
+        $location.path('/');
+    }
     $scope.message = '';
 
 
     quizData.state = 4;
     quizData.data.winner = {"name":"Lizzy","score":"10"};
 
-    $http.post('http://quizzzy.herokuapp.com/state', quizData)
+    $http.post(quizApi, quizData)
         .success(function (data) {
             quizData = data;
         })
@@ -207,5 +217,7 @@ quizApp.controller('uitslagController', function ($scope, $http, $location) {
 });
 
 quizApp.controller('errorController', function ($scope, $http, $location) {
-
+    if(!quizData.currentView) {
+        $location.path('/');
+    }
 });
