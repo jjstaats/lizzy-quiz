@@ -217,6 +217,9 @@ quizApp.controller('uitslagController', function ($scope, $http, $location) {
 });
 
 quizApp.controller('errorController', function ($scope, $http, $location) {
+
+    $scope.message = "Fout!"
+
     if(!quizData.currentView) {
         $location.path('/');
     }
