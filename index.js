@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 db.bind('states');
+db.bind('passwords');
 
 app.get('/state', function (request, response) {
     db.states.findOne({current:stateName}, function(err, result) {
@@ -25,21 +26,72 @@ app.get('/state', function (request, response) {
         } else {
             response.json({message:'Quiz master has not yet started!'})
         }
-
     });
 });
 
-app.post('/state', function (request, response) {
-    db.states.findOne({current:stateName}, function(err, result) {
+app.post('/state/:pass', function (request, response) {
+
+    db.passwords.findOne({current:stateName}, function(err, result){
         if (err) response.json({message:err.message});
+        if (result != null)  {
+            if(result.password === request.params.pass) {
+                db.states.findOne({current:stateName}, function(err, result) {
+                    if (err) response.json({message:err.message});
+                    if (result != null) {
+                        db.states.update({_id:result._id}, {$set:{body:request.body}}, function(err, result) {
+                            if (err) response.json({message:err.message});
+                            response.json(request.body);
+                        });
+                    } else {
+                        db.states.insert({current:stateName, body:request.body}, function(err, result) {
+                            if (err) response.json({message:err.message});
+                            response.json(request.body);
+                        });
+                    }
+                });
+            } else {
+                response.json({message:'Quiz master password wrong'})
+            }
+        } else {
+            response.json({message:'Quiz master has not yet started!'})
+        }
+    });
+});
+
+app.post('/password', function (request, response) {
+
+    db.passwords.findOne({current:stateName}, function(err, result) {
+        if (err) response.json({message: err.message});
         if (result != null) {
-            db.states.update({_id:result._id}, {$set:{body:request.body}}, function(err, result) {
-                if (err) response.json({message:err.message});
+            if(result.password !== '') {
+                response.json({message:'Quiz master password already set.'})
+            } else {
+                db.passwords.update({_id: result._id}, {$set: {password: request.body.password}}, function (err, result) {
+                    if (err) response.json({message: err.message});
+                    response.json(request.body);
+                });
+            }
+        } else {
+            db.passwords.insert({current: stateName, password: ''}, function (err, result) {
+                if (err) response.json({message: err.message});
+                response.json(request.body);
+            });
+        }
+    });
+});
+
+app.get('/restart', function (request, response) {
+
+    db.passwords.findOne({current:stateName}, function(err, result) {
+        if (err) response.json({message: err.message});
+        if (result != null) {
+            db.passwords.update({_id: result._id}, {$set: {password: ''}}, function (err, result) {
+                if (err) response.json({message: err.message});
                 response.json(request.body);
             });
         } else {
-            db.states.insert({current:stateName, body:request.body}, function(err, result) {
-                if (err) response.json({message:err.message});
+            db.passwords.insert({current: stateName, password: ''}, function (err, result) {
+                if (err) response.json({message: err.message});
                 response.json(request.body);
             });
         }
