@@ -14,8 +14,13 @@ body {
 
 }
 
-.navbar {
+header {
     background-color: #2c393a;
+    font-size: 2em;
+    text-align: left;
+    border-bottom: dotted 3px white;
+    padding: 1em;
+
 }
 .well {
     background-color: #950d5d;

@@ -6,10 +6,21 @@ var quizApi = "http://quizzzy.herokuapp.com/state";
 var quizData = {};
 
 var opdrachten = [
-    "opdracht 1",
-    "opdracht 2",
-    "opdracht 3",
-    "opdracht 4"
+    "Noem 5 surprise van vorig jaar.",
+    "Sta stil en doe een dansje.",
+    "Wat is het stomste wat je het afgelopen jaar hebt gedaan?",
+    "Koop een jurylid om met complimenten.",
+    "Doe een pauw na. (Lizzy en Anne weten hoe!)",
+    "Bedreig de quizmaster, je krijgt punten voor stijl.",
+    "Aai Michiel over zijn bol!",
+    "Zing een stuk van een Disney nummer.",
+    "Wissel je trui met iemand. (kersttrui is 2x de jurypunten)",
+    "Geeft de mooiste geklede persoon een compliment. (hint: misschien een jury lid :p)",
+    "Scheld Jeroen uit! Je krijgt punten voor stijl!",
+    "Scheld in latijn.",
+    "Haal voor de juryleden drinken.",
+    "Verzin zelf een opdracht voor maximaal punten! Jury punten 2x!",
+    "Doe het Gangnam style dansje"
 ];
 
 quizApp.run(['$http', '$q', function ($http, $q) {
@@ -54,7 +65,7 @@ quizApp.config(function ($routeProvider) {
 // create the controler and inject Angular's $scope
 quizApp.controller('mainController', function ($scope, $http, $location) {
     // create a message to display in our view
-    $scope.message = 'Start this fucking quiz!';
+    $scope.message = 'Start';
 
     // process the form
     $scope.formData = {};
@@ -155,7 +166,7 @@ quizApp.controller('opdrachtController', function ($scope, $http, $location, $ro
 });
 
 quizApp.controller('uitslagController', function ($scope, $http, $location) {
-    $scope.message = 'Geen handelingen kunnen doen toch?';
+    $scope.message = '';
 
 
     quizData.state = 4;
