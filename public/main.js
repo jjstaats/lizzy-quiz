@@ -9,12 +9,16 @@ var state2 = $('#state-2');
 var state3 = $('#state-3');
 var state4 = $('#state-4');
 
+var currentState = 1;
+
 function update() {
     $.getJSON("http://quizzzy.herokuapp.com/state")
         .done(function (data) {
             console.log(data.state);
             if (1 == data.state) {
-                setState1(data.data);
+                if ( 1 !== currentState ) {
+                    setState1(data.data);
+                }
             }
             if (2 == data.state) {
                 setState2(data.data);
@@ -23,7 +27,9 @@ function update() {
                 setState3(data.data);
             }
             if (4 == data.state) {
-                setState4(data.data);
+                if ( 4 !== currentState ) {
+                    setState4(data.data);
+                }
             }
         })
         .fail(function (data) {
@@ -41,6 +47,8 @@ function setState1(data) {
     state2.hide();
     state3.hide();
     state4.hide();
+
+    currentState = 1;
 }
 
 function setState2(data) {
@@ -53,6 +61,8 @@ function setState2(data) {
     state2.show();
     state3.hide();
     state4.hide();
+
+    currentState = 2;
 }
 
 function setState3(data) {
@@ -64,14 +74,26 @@ function setState3(data) {
     state2.hide();
     state3.show();
     state4.hide();
+
+    currentState = 3;
 }
 
 function setState4(data) {
     console.log('state4');
     console.log(data);
+    $('.score').hide();
+    $('.loading').show();
     $('.player-winner').html(data.winner.name);
     state1.hide();
     state2.hide();
     state3.hide();
     state4.show();
+    setTimeout(loadingDone,1500);
+
+    function loadingDone() {
+        $('.score').show();
+        $('.loading').hide();
+    }
+
+    currentState = 4;
 }
