@@ -80,17 +80,24 @@ function setState4(data) {
     console.log('state4');
     console.log(data);
     $('.score').hide();
+    $('.long').hide();
     $('.loading').show();
     $('.player-winner').html(data.winner.name);
     state1.hide();
     state2.hide();
     state3.hide();
     state4.show();
-    setTimeout(loadingDone,1500);
+    setTimeout(loadingDone,6500);
 
     function loadingDone() {
-        $('.score').show();
+        $('.long').show();
         $('.loading').hide();
+        setTimeout(loadingWinner, 6500);
+    }
+
+    function loadingWinner(){
+        $('.score').show();
+        $('.long').hide();
     }
 
     currentState = 4;

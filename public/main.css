@@ -25,6 +25,31 @@ header {
     border-bottom: dotted 2px white;
 }
 
+.loading {
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 1.3em;
+}
+
+.long {
+    text-align: center;
+    color: #950d5d;
+    font-size: 1em;
+}
+.score {
+    text-align: center;
+}
+.player-winner {
+    font-size: 1.3em;
+}
+.waarschuwing {
+    color: red;
+    background-color: white;
+    padding: 10px;
+    border-radius: 3px;
+
+}
+
 #state-1 {
 
 }

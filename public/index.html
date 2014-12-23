@@ -41,18 +41,29 @@
         <!-- game state 3 -->
         <div id="state-3" class="state ">
             <h1>Opdracht voor <span class="player player-current"></span></h1>
-            <p class="assignment">bla bla bla bla bla</p>
+            <p class="assignment">&nbsp;</p>
         </div>
 
         <!-- game state 4 -->
         <div id="state-4" class="state ">
             <div class="loading">
-                <h2>Berekening</h2>
+                <p class="loading">Berekening eindscore</p>
                 <img src="ajax-loader.gif" alt="loading"/>
             </div>
+
+            <div class="long">
+                <div class="waarschuwing">
+                    <h1>Waarschuwing!</h1>
+                    <p>Computer heeft moeite met het resultaat....<br/><small>Ik wil het eigenlijk niet zeggen...</small></p>
+                </div>
+                <p><img src="ajax-loader.gif" alt="loading"/></p>
+
+            </div>
+
             <div class="score">
                 <h2><span class="player player-winner"></span> is de winnaar!!</h2>
             </div>
+
         </div>
 
         <script src="jquery-2.1.3.min.js"></script>
